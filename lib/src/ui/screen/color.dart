@@ -42,7 +42,7 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
           /// Button to navigate to next page
           CupertinoButton(
             onPressed: () => Navigator.of(context)
-                .popUntil(ModalRoute.withName('/')),
+                .popUntil(ModalRoute.withName(WidthAnimationPage.kRouteName)),
             padding: EdgeInsets.zero,
             child: Text('back to top',
               style: Theme.of(context).primaryTextTheme.title,

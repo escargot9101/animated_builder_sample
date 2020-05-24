@@ -13,9 +13,9 @@ class AnimationSampleApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WidthAnimationPage(),
+      initialRoute: WidthAnimationPage.kRouteName,
       routes: <String, WidgetBuilder>{
-        //WidthAnimationPage.kRouteName: (BuildContext context) => WidthAnimationPage(),
+        WidthAnimationPage.kRouteName: (BuildContext context) => WidthAnimationPage(),
         OpacityAnimationPage.kRouteName: (BuildContext context) => OpacityAnimationPage(),
         OffsetAnimationPage.kRouteName: (BuildContext context) => OffsetAnimationPage(),
         ScaleAnimationPage.kRouteName: (BuildContext context) => ScaleAnimationPage(),
