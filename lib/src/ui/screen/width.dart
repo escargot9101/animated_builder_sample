@@ -28,9 +28,9 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
 
   @override
   void dispose() {
-    super.dispose();
     /// controllerのライフサイクル管理を忘れずに！
     _controller.dispose();
+    super.dispose();
   }
 
   @override

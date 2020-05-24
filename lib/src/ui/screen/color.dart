@@ -28,9 +28,9 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
 
   @override
   void dispose() {
-    super.dispose();
     /// controllerのライフサイクル管理を忘れずに！
     _controller.dispose();
+    super.dispose();
   }
 
   @override

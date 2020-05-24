@@ -28,9 +28,9 @@ class _ScaleAnimationPageState extends State<ScaleAnimationPage>
 
   @override
   void dispose() {
-    super.dispose();
     /// controllerのライフサイクル管理を忘れずに！
     _controller.dispose();
+    super.dispose();
   }
 
   @override
