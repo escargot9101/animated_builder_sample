@@ -47,7 +47,7 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
             child: Row(
               children: <Widget>[
                 Text('offset',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
                 Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
@@ -71,7 +71,7 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
               ),
               Spacer(),
@@ -114,7 +114,7 @@ class WidthAnimation extends StatelessWidget {
       builder: _animationBuilder,
       animation: controller,
       child: Text('opacity',
-        style: Theme.of(context).primaryTextTheme.title,
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }

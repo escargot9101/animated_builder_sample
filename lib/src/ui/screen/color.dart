@@ -45,7 +45,7 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
                 .popUntil(ModalRoute.withName(WidthAnimationPage.kRouteName)),
             padding: EdgeInsets.zero,
             child: Text('back to top',
-              style: Theme.of(context).primaryTextTheme.title,
+              style: Theme.of(context).primaryTextTheme.headline6,
             ),
           ),
         ],
@@ -66,7 +66,7 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
               ),
               Spacer(),
@@ -116,7 +116,7 @@ class WidthAnimation extends StatelessWidget {
       builder: _animationBuilder,
       animation: controller,
       child: Text('color',
-        style: Theme.of(context).primaryTextTheme.title,
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }

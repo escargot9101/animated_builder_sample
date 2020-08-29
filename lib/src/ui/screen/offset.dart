@@ -46,7 +46,7 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
             child: Row(
               children: <Widget>[
                 Text('scale',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
                 Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
@@ -70,7 +70,7 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
               ),
               Spacer(),
@@ -124,7 +124,7 @@ class WidthAnimation extends StatelessWidget {
         alignment: Alignment.center,
         color: Colors.red,
         child: Text('offset',
-          style: Theme.of(context).primaryTextTheme.title,
+          style: Theme.of(context).primaryTextTheme.headline6,
         ),
       ),
     );

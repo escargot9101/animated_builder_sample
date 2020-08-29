@@ -47,7 +47,7 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
             child: Row(
               children: <Widget>[
                 Text('opacity',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
                 Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
@@ -71,7 +71,7 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
               ),
               Spacer(),
@@ -111,7 +111,7 @@ class WidthAnimation extends StatelessWidget {
       builder: _animationBuilder,
       animation: controller,
       child: Text('width',
-        style: Theme.of(context).primaryTextTheme.title,
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }

@@ -47,7 +47,7 @@ class _ScaleAnimationPageState extends State<ScaleAnimationPage>
             child: Row(
               children: <Widget>[
                 Text('color',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
                 Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
@@ -71,7 +71,7 @@ class _ScaleAnimationPageState extends State<ScaleAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.title,
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 ),
               ),
               Spacer(),
@@ -122,7 +122,7 @@ class WidthAnimation extends StatelessWidget {
         alignment: Alignment.center,
         color: Colors.red,
         child: Text('scale',
-          style: Theme.of(context).primaryTextTheme.title,
+          style: Theme.of(context).primaryTextTheme.headline6,
         ),
       ),
     );
