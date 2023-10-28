@@ -1,20 +1,20 @@
-import 'package:animatedbuildersample/src/ui/screen/offset.dart';
+import 'package:animated_builder_sample/src/ui/screen/offset.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OpacityAnimationPage extends StatefulWidget {
-  OpacityAnimationPage({Key key}) : super(key: key);
+  const OpacityAnimationPage({super.key});
 
-  static const kRouteName = '/opacity';
+  static const kRouteName = 'opacity';
 
   @override
-  _OpacityAnimationPageState createState() => _OpacityAnimationPageState();
+  State<OpacityAnimationPage> createState() => _OpacityAnimationPageState();
 }
 
 class _OpacityAnimationPageState extends State<OpacityAnimationPage>
     with SingleTickerProviderStateMixin {
-
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -37,19 +37,20 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('opacity animation'),
+        title: const Text('opacity animation'),
         actions: <Widget>[
           /// Button to navigate to next page
           CupertinoButton(
-            onPressed: () => Navigator.of(context)
-                .pushNamed(OffsetAnimationPage.kRouteName),
+            onPressed: () => context.go(
+                '${GoRouterState.of(context).matchedLocation}/${OffsetAnimationPage.kRouteName}'),
             padding: EdgeInsets.zero,
             child: Row(
               children: <Widget>[
-                Text('offset',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                Text(
+                  'offset',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
-                Icon(Icons.arrow_forward_ios, color: Colors.white),
+                const Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
             ),
           ),
@@ -60,7 +61,7 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
         children: <Widget>[
           Row(
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               CupertinoButton(
                 onPressed: () {
                   if (_controller.status == AnimationStatus.dismissed) {
@@ -70,14 +71,15 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
                   }
                 },
                 color: Colors.green,
-                child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                child: Text(
+                  'animate',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
-          SizedBox(height: 100.0),
+          const SizedBox(height: 100.0),
           WidthAnimation(controller: _controller),
         ],
       ),
@@ -87,15 +89,14 @@ class _OpacityAnimationPageState extends State<OpacityAnimationPage>
 
 class WidthAnimation extends StatelessWidget {
   WidthAnimation({
-    Key key,
-    this.controller,
-  }) : _opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller),
-        super(key: key);
+    super.key,
+    required this.controller,
+  }) : _opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
 
   final AnimationController controller;
   final Animation<double> _opacity;
 
-  Widget _animationBuilder(BuildContext context, Widget child) {
+  Widget _animationBuilder(BuildContext context, Widget? child) {
     return Opacity(
       opacity: _opacity.value,
       child: Container(
@@ -113,8 +114,9 @@ class WidthAnimation extends StatelessWidget {
     return AnimatedBuilder(
       builder: _animationBuilder,
       animation: controller,
-      child: Text('opacity',
-        style: Theme.of(context).primaryTextTheme.headline6,
+      child: Text(
+        'opacity',
+        style: Theme.of(context).primaryTextTheme.titleLarge,
       ),
     );
   }

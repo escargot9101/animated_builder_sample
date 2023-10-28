@@ -1,20 +1,20 @@
-import 'package:animatedbuildersample/src/ui/screen/opacity.dart';
+import 'package:animated_builder_sample/src/ui/screen/opacity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class WidthAnimationPage extends StatefulWidget {
-  WidthAnimationPage({Key key}) : super(key: key);
+  const WidthAnimationPage({super.key});
 
-  static const kRouteName = '/width';
+  static const kRouteName = 'width';
 
   @override
-  _WidthAnimationPageState createState() => _WidthAnimationPageState();
+  State<WidthAnimationPage> createState() => _WidthAnimationPageState();
 }
 
 class _WidthAnimationPageState extends State<WidthAnimationPage>
     with SingleTickerProviderStateMixin {
-
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -37,19 +37,20 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('width animation'),
+        title: const Text('width animation'),
         actions: <Widget>[
           /// Button to navigate to next page
           CupertinoButton(
-            onPressed: () => Navigator.of(context)
-                .pushNamed(OpacityAnimationPage.kRouteName),
+            onPressed: () => context.go(
+                '${GoRouterState.of(context).matchedLocation}/${OpacityAnimationPage.kRouteName}'),
             padding: EdgeInsets.zero,
             child: Row(
               children: <Widget>[
-                Text('opacity',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                Text(
+                  'opacity',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
-                Icon(Icons.arrow_forward_ios, color: Colors.white),
+                const Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
             ),
           ),
@@ -60,7 +61,7 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
         children: <Widget>[
           Row(
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               CupertinoButton(
                 onPressed: () {
                   if (_controller.status == AnimationStatus.dismissed) {
@@ -70,14 +71,15 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
                   }
                 },
                 color: Colors.green,
-                child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                child: Text(
+                  'animate',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
-          SizedBox(height: 100.0),
+          const SizedBox(height: 100.0),
           WidthAnimation(controller: _controller),
         ],
       ),
@@ -87,15 +89,14 @@ class _WidthAnimationPageState extends State<WidthAnimationPage>
 
 class WidthAnimation extends StatelessWidget {
   WidthAnimation({
-    Key key,
-    this.controller,
-  }) : _width = Tween<double>(begin: 100.0, end: 300.0).animate(controller),
-       super(key: key);
+    super.key,
+    required this.controller,
+  }) : _width = Tween<double>(begin: 100.0, end: 300.0).animate(controller);
 
   final AnimationController controller;
   final Animation<double> _width;
 
-  Widget _animationBuilder(BuildContext context, Widget child) {
+  Widget _animationBuilder(BuildContext context, Widget? child) {
     return Container(
       width: _width.value,
       height: 100.0,
@@ -110,8 +111,9 @@ class WidthAnimation extends StatelessWidget {
     return AnimatedBuilder(
       builder: _animationBuilder,
       animation: controller,
-      child: Text('width',
-        style: Theme.of(context).primaryTextTheme.headline6,
+      child: Text(
+        'width',
+        style: Theme.of(context).primaryTextTheme.titleLarge,
       ),
     );
   }

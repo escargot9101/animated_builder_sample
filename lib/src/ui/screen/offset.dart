@@ -1,20 +1,20 @@
-import 'package:animatedbuildersample/src/ui/screen/scale.dart';
+import 'package:animated_builder_sample/src/ui/screen/scale.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OffsetAnimationPage extends StatefulWidget {
-  OffsetAnimationPage({Key key}) : super(key: key);
+  const OffsetAnimationPage({super.key});
 
-  static const kRouteName = '/offset';
+  static const kRouteName = 'offset';
 
   @override
-  _OffsetAnimationPageState createState() => _OffsetAnimationPageState();
+  State<OffsetAnimationPage> createState() => _OffsetAnimationPageState();
 }
 
 class _OffsetAnimationPageState extends State<OffsetAnimationPage>
     with SingleTickerProviderStateMixin {
-
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -37,18 +37,20 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('offset animation'),
+        title: const Text('offset animation'),
         actions: <Widget>[
           /// Button to navigate to next page
           CupertinoButton(
-            onPressed: () => Navigator.of(context).pushNamed(ScaleAnimationPage.kRouteName),
+            onPressed: () => context.go(
+                '${GoRouterState.of(context).matchedLocation}/${ScaleAnimationPage.kRouteName}'),
             padding: EdgeInsets.zero,
             child: Row(
               children: <Widget>[
-                Text('scale',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                Text(
+                  'scale',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
-                Icon(Icons.arrow_forward_ios, color: Colors.white),
+                const Icon(Icons.arrow_forward_ios, color: Colors.white),
               ],
             ),
           ),
@@ -59,7 +61,7 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
         children: <Widget>[
           Row(
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               CupertinoButton(
                 onPressed: () {
                   if (_controller.status == AnimationStatus.dismissed) {
@@ -69,14 +71,15 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
                   }
                 },
                 color: Colors.green,
-                child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                child: Text(
+                  'animate',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
-          SizedBox(height: 100.0),
+          const SizedBox(height: 100.0),
           WidthAnimation(controller: _controller),
         ],
       ),
@@ -86,25 +89,24 @@ class _OffsetAnimationPageState extends State<OffsetAnimationPage>
 
 class WidthAnimation extends StatelessWidget {
   WidthAnimation({
-    Key key,
-    this.controller,
+    super.key,
+    required this.controller,
   }) : _offset = Tween<Offset>(
-         begin: const Offset(-100.0, 50.0),  // Offset(dx, dy)
-         end: const Offset(100.0, -50.0),
-       ).animate(
-         /// アニメーションにカーブを設定したいときには
-         /// AnimationControllerをCurvedAnimationで包む
-         CurvedAnimation(
-           parent: controller,
-           curve: Curves.easeInOut,
-         ),
-       ),
-       super(key: key);
+          begin: const Offset(-100.0, 50.0), // Offset(dx, dy)
+          end: const Offset(100.0, -50.0),
+        ).animate(
+          /// アニメーションにカーブを設定したいときには
+          /// AnimationControllerをCurvedAnimationで包む
+          CurvedAnimation(
+            parent: controller,
+            curve: Curves.easeInOut,
+          ),
+        );
 
   final AnimationController controller;
   final Animation<Offset> _offset;
 
-  Widget _animationBuilder(BuildContext context, Widget child) {
+  Widget _animationBuilder(BuildContext context, Widget? child) {
     return Transform.translate(
       offset: _offset.value,
       child: child,
@@ -116,6 +118,7 @@ class WidthAnimation extends StatelessWidget {
     return AnimatedBuilder(
       builder: _animationBuilder,
       animation: controller,
+
       /// Transformを使用する場合は、アニメーションがContainer自体のパラメータに
       /// 影響しないのでContainerをまるごとchildに含めて無駄なリビルドを抑制する。
       child: Container(
@@ -123,8 +126,9 @@ class WidthAnimation extends StatelessWidget {
         height: 100.0,
         alignment: Alignment.center,
         color: Colors.red,
-        child: Text('offset',
-          style: Theme.of(context).primaryTextTheme.headline6,
+        child: Text(
+          'offset',
+          style: Theme.of(context).primaryTextTheme.titleLarge,
         ),
       ),
     );

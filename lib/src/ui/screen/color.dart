@@ -1,20 +1,21 @@
-import 'package:animatedbuildersample/src/ui/screen/width.dart';
+import 'package:animated_builder_sample/src/ui/screen/width.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ColorAnimationPage extends StatefulWidget {
-  ColorAnimationPage({Key key}) : super(key: key);
+  const ColorAnimationPage({super.key});
 
-  static const kRouteName = '/color';
+  static const kRouteName = 'color';
 
   @override
-  _ColorAnimationPageState createState() => _ColorAnimationPageState();
+  State<ColorAnimationPage> createState() => _ColorAnimationPageState();
 }
 
 class _ColorAnimationPageState extends State<ColorAnimationPage>
     with SingleTickerProviderStateMixin {
 
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -37,15 +38,14 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('color animation'),
+        title: const Text('color animation'),
         actions: <Widget>[
           /// Button to navigate to next page
           CupertinoButton(
-            onPressed: () => Navigator.of(context)
-                .popUntil(ModalRoute.withName(WidthAnimationPage.kRouteName)),
+            onPressed: () => GoRouter.of(context).go('/${WidthAnimationPage.kRouteName}'),
             padding: EdgeInsets.zero,
             child: Text('back to top',
-              style: Theme.of(context).primaryTextTheme.headline6,
+              style: Theme.of(context).primaryTextTheme.titleLarge,
             ),
           ),
         ],
@@ -55,7 +55,7 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
         children: <Widget>[
           Row(
             children: <Widget>[
-              Spacer(),
+              const Spacer(),
               CupertinoButton(
                 onPressed: () {
                   if (_controller.status == AnimationStatus.dismissed) {
@@ -66,13 +66,13 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
                 },
                 color: Colors.green,
                 child: Text('animate',
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
-          SizedBox(height: 100.0),
+          const SizedBox(height: 100.0),
           WidthAnimation(controller: _controller),
         ],
       ),
@@ -82,8 +82,8 @@ class _ColorAnimationPageState extends State<ColorAnimationPage>
 
 class WidthAnimation extends StatelessWidget {
   WidthAnimation({
-    Key key,
-    this.controller,
+    super.key,
+    required this.controller,
   }) : _color = ColorTween(
          begin: Colors.red,
          end: Colors.cyan,
@@ -94,13 +94,12 @@ class WidthAnimation extends StatelessWidget {
            parent: controller,
            curve: Curves.easeInOut,
          ),
-       ),
-       super(key: key);
+       );
 
   final AnimationController controller;
-  final Animation<Color> _color;
+  final Animation<Color?> _color;
 
-  Widget _animationBuilder(BuildContext context, Widget child) {
+  Widget _animationBuilder(BuildContext context, Widget? child) {
     return Container(
       width: 100.0,
       height: 100.0,
@@ -116,7 +115,7 @@ class WidthAnimation extends StatelessWidget {
       builder: _animationBuilder,
       animation: controller,
       child: Text('color',
-        style: Theme.of(context).primaryTextTheme.headline6,
+        style: Theme.of(context).primaryTextTheme.titleLarge,
       ),
     );
   }
